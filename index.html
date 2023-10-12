@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">Disco</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">ISpeakWaves</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">disco-strings</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Laser Chargeup</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">House loops</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">uh oh</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">dirty-reverb-guitar</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Snarewobble</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">discoiasound-discogenre</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="./383285__musicfishaudio__disco_beat_100_musicfishaudio.mp3"></audio>
+  <audio data-key="83" src="./440485__timbre__loopable-excerpt-of-ispeakwavess-freesound-384947.flac"></audio>
+  <audio data-key="68" src="./464062__xhale303__disco-strings.wav"></audio>
+  <audio data-key="70" src="./592573__magnuswaker__laser-charge-up-stronger.wav"></audio>
+  <audio data-key="71" src="./607416__josefpres__house-loops-105-simple-mix-120-bpm.wav"></audio>
+  <audio data-key="72" src="./649935__xantherock__uh-oh.mp3"></audio>
+  <audio data-key="74" src="./652740__destructo20__dirty-reverb-guitar-track.wav"></audio>
+  <audio data-key="75" src="./657576__gmortizwavs__snarewobble.wav"></audio>
+  <audio data-key="76" src="./702137__ztidlen__discoiasound-discogenre-3.mp3"></audio>
+
+<script>
+  function playsound(e){
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.classList.add(`playing`);
+  }
+
+  function removeTransition(e){
+    if (e.propertyName !== `transform`) return;
+    this.classList.remove(`playing`);
+  }
+
+  const keys = document.querySelectorAll(`.key`);
+  keys.forEach(key => key.addEventListener(`transitionend`,removeTransition));
+  window.addEventListener(`keydown`, playsound);
+
+</script>
+
+
+</body>
+</html>
